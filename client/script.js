@@ -2,6 +2,8 @@
 //THE TEST SERVER IS RUNNING ON LOCALHOST:3000//
 ////////////////////////////////////////////////
 
+
+
 // PROBLEM 1
 /*
     In the index.html file in this folder there is a button with an id of 'say-hello-button'!
@@ -10,6 +12,7 @@
 */
 
 // CODE HERE
+const sayHelloButton = document.querySelector('#say-hello-button')
 
 
 // PROBLEM 2
@@ -20,6 +23,14 @@
 */
 
 // CODE HERE
+
+// const sayHelloText = document.querySelector('#hello-text')
+
+sayHelloButton.addEventListener("mouseover", () => {
+    sayHelloButton.style.backgroundColor = 'black'
+    sayHelloButton.style.color = 'white'
+})
+
 
 
 // PROBLEM 3
@@ -32,6 +43,10 @@
 */
 
 // CODE HERE
+sayHelloButton.addEventListener("mouseout", () => {
+    sayHelloButton.style.backgroundColor = '#EFEFEF'
+    sayHelloButton.style.color = 'black'
+})
 
 
 // PROBLEM 4
@@ -53,6 +68,7 @@ const sayHello = () => {
 // DO NOT EDIT FUNCTION
 
 // CODE HERE
+sayHelloButton.addEventListener("click", sayHello)
 
 
 // PROBLEM 5 
@@ -67,7 +83,11 @@ const sayHello = () => {
 */ 
 
 const ohMy = () => {
-    // YOUR CODE HERE
+    axios.get('http://localhost:3000/animals')
+        .then(function(res) {
+            console.log(res.data)
+        })
+    
 }
 
 document.getElementById('animals-button').addEventListener('click', ohMy)
@@ -87,8 +107,16 @@ document.getElementById('animals-button').addEventListener('click', ohMy)
 */
 
 const repeatMyParam = () => {
-    //YOUR CODE HERE
+    axios.get(`http://localhost:3000/repeat/'Charlie Brown'`)
+        .then(function(res) {
+            console.log(res.data)
+            let textCont = document.getElementById('repeat-text')
+            textCont.textContent = res.data
+            textCont.style.display = 'block'
+        })
 }
+
+document.getElementById('repeat-button').addEventListener('click', repeatMyParam)
 
 // PROBLEM 7
 /*
@@ -110,7 +138,15 @@ const repeatMyParam = () => {
     Outside of your new function, select the button with the id "query-button" and add a click event listener that calls your function.
 */
 
-// CODE HERE
+function soClose() {
+    axios.get(`http://localhost:3000/query-test/?words=Johnnny boy`)
+    .then(function(res) {
+        console.log(res.data)
+    })
+    .catch(err => console.log(err))
+}
+
+document.getElementById('query-button').addEventListener("click", soClose)
 
 
 
